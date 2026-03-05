@@ -33,7 +33,7 @@ const {TrieRouterCors} = require('@e22m4u/js-trie-router-cors');
 ## Использование
 
 Подключение модуля к маршрутизатору выполняется через внедрение
-зависимости. Сервис регистрируется с передачей объекта параметров.
+зависимости. Сервис регистрируется с передачей объекта настроек.
 
 ```js
 import {TrieRouter} from '@e22m4u/js-trie-router';
@@ -56,7 +56,7 @@ router.useService(TrieRouterCors, {
 
 ### origin
 
-Типы: `boolean | string | RegExp | Function | (string | RegExp)[]`
+Типы: `boolean | string | RegExp | Function | (string | RegExp)[]`  
 По умолчанию: `false`
 
 Опция управляет проверкой источника. Возможные варианты значений представлены
@@ -120,7 +120,7 @@ Access-Control-Allow-Credentials: true
 
 ### methods
 
-Типы: `string | string[]`
+Типы: `string | string[]`  
 По умолчанию: `GET, HEAD, PUT, PATCH, POST, DELETE`
 
 Опция задает разрешенные методы. Значение по умолчанию включает
@@ -135,7 +135,7 @@ router.useService(TrieRouterCors, {
 
 ### allowedHeaders
 
-Типы: `string | string[]`
+Типы: `string | string[]`  
 По умолчанию: `undefined`
 
 Опция задает разрешенные заголовки. По умолчанию модуль применяет
@@ -150,7 +150,7 @@ router.useService(TrieRouterCors, {
 
 ### exposedHeaders
 
-Типы: `string | string[]`
+Типы: `string | string[]`  
 По умолчанию: `undefined`
 
 Опция определяет заголовки для чтения на стороне клиента. Значением
@@ -165,7 +165,7 @@ router.useService(TrieRouterCors, {
 
 ### credentials
 
-Типы: `boolean`
+Типы: `boolean`  
 По умолчанию: `false`
 
 Опция управляет передачей данных авторизации. Установка значения
@@ -180,7 +180,7 @@ router.useService(TrieRouterCors, {
 
 ### maxAge
 
-Типы: `number`
+Типы: `number`  
 По умолчанию: `undefined`
 
 Опция указывает время жизни предварительного запроса. Срок действия
