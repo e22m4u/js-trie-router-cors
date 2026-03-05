@@ -490,9 +490,9 @@ describe('TrieRouterCors', function () {
       const S = router.getService(TrieRouterCors, {origin: true});
       const req = createRequestMock();
       const res = createResponseMock();
-      res.setHeader(VARY_HEADER, 'Foo,Bar');
+      res.setHeader(VARY_HEADER, 'Foo, Bar');
       S._applyCorsHeaders(req, res, EXAMPLE_ORIGIN, true);
-      expect(res.getHeader(VARY_HEADER)).to.be.eq('Foo,Bar,Origin');
+      expect(res.getHeader(VARY_HEADER)).to.be.eq('Foo, Bar, Origin');
     });
 
     it('should ignore existing headers in the "Vary" header with a string value', function () {
@@ -500,9 +500,9 @@ describe('TrieRouterCors', function () {
       const S = router.getService(TrieRouterCors, {origin: true});
       const req = createRequestMock();
       const res = createResponseMock();
-      res.setHeader(VARY_HEADER, 'Foo,Bar,Origin');
+      res.setHeader(VARY_HEADER, 'Foo, Bar, Origin');
       S._applyCorsHeaders(req, res, EXAMPLE_ORIGIN, true);
-      expect(res.getHeader(VARY_HEADER)).to.be.eq('Foo,Bar,Origin');
+      expect(res.getHeader(VARY_HEADER)).to.be.eq('Foo, Bar, Origin');
     });
 
     it('should append headers to an existing "Vary" header with an array value', function () {
@@ -512,7 +512,7 @@ describe('TrieRouterCors', function () {
       const res = createResponseMock();
       res.setHeader(VARY_HEADER, ['Foo', 'Bar']);
       S._applyCorsHeaders(req, res, EXAMPLE_ORIGIN, true);
-      expect(res.getHeader(VARY_HEADER)).to.be.eq('Foo,Bar,Origin');
+      expect(res.getHeader(VARY_HEADER)).to.be.eql(['Foo', 'Bar', 'Origin']);
     });
 
     it('should ignore existing headers in the "Vary" header with an array value', function () {
@@ -522,7 +522,7 @@ describe('TrieRouterCors', function () {
       const res = createResponseMock();
       res.setHeader(VARY_HEADER, ['Foo', 'Bar', 'Origin']);
       S._applyCorsHeaders(req, res, EXAMPLE_ORIGIN, true);
-      expect(res.getHeader(VARY_HEADER)).to.be.eq('Foo,Bar,Origin');
+      expect(res.getHeader(VARY_HEADER)).to.be.eql(['Foo', 'Bar', 'Origin']);
     });
 
     it('should set the header "Access-Control-Allow-Credentials" when the option "credentials" is true', function () {
@@ -536,7 +536,7 @@ describe('TrieRouterCors', function () {
 
     it('should set the header "Access-Control-Expose-Headers" from the option "exposedHeaders" with a string value', function () {
       const router = new TrieRouter();
-      const exposedHeaders = 'Foo,Bar';
+      const exposedHeaders = 'Foo, Bar';
       const S = router.getService(TrieRouterCors, {exposedHeaders});
       const req = createRequestMock();
       const res = createResponseMock();
@@ -547,7 +547,7 @@ describe('TrieRouterCors', function () {
     it('should set the header "Access-Control-Expose-Headers" from the option "exposedHeaders" with an array value', function () {
       const router = new TrieRouter();
       const exposedHeaders = ['Foo', 'Bar'];
-      const expectedValue = exposedHeaders.join(',');
+      const expectedValue = exposedHeaders.join(', ');
       const S = router.getService(TrieRouterCors, {exposedHeaders});
       const req = createRequestMock();
       const res = createResponseMock();
@@ -588,7 +588,7 @@ describe('TrieRouterCors', function () {
       it('should set the header "Access-Control-Allow-Methods" from the option "methods" with an array value', function () {
         const router = new TrieRouter();
         const methods = [HttpMethod.POST, HttpMethod.OPTIONS];
-        const expectedValue = methods.join(',');
+        const expectedValue = methods.join(', ');
         const S = router.getService(TrieRouterCors, {methods});
         const req = createRequestMock({method: HttpMethod.OPTIONS});
         const res = createResponseMock();
@@ -607,7 +607,7 @@ describe('TrieRouterCors', function () {
 
       it('should set the header "Access-Control-Allow-Headers" from the option "allowedHeaders" with a string value', function () {
         const router = new TrieRouter();
-        const allowedHeaders = 'Foo,Bar';
+        const allowedHeaders = 'Foo, Bar';
         const S = router.getService(TrieRouterCors, {allowedHeaders});
         const req = createRequestMock({method: HttpMethod.OPTIONS});
         const res = createResponseMock();
@@ -619,7 +619,7 @@ describe('TrieRouterCors', function () {
         const router = new TrieRouter();
         const allowedHeaders = ['Foo', 'Bar'];
         const S = router.getService(TrieRouterCors, {allowedHeaders});
-        const expectedValue = allowedHeaders.join(',');
+        const expectedValue = allowedHeaders.join(', ');
         const req = createRequestMock({method: HttpMethod.OPTIONS});
         const res = createResponseMock();
         S._applyCorsHeaders(req, res, EXAMPLE_ORIGIN, true);
@@ -629,7 +629,7 @@ describe('TrieRouterCors', function () {
       it('should reflect the provided "Access-Control-Request-Headers" request header', function () {
         const router = new TrieRouter();
         const S = router.getService(TrieRouterCors);
-        const headers = 'Foo,Bar';
+        const headers = 'Foo, Bar';
         const req = createRequestMock({
           method: HttpMethod.OPTIONS,
           headers: {[AC_REQUEST_HEADERS]: headers},
@@ -642,10 +642,10 @@ describe('TrieRouterCors', function () {
       it('should set the header "Vary" when the header "Access-Control-Request-Headers" is provided', function () {
         const router = new TrieRouter();
         const S = router.getService(TrieRouterCors);
-        const expectedVary = [ORIGIN_HEADER, AC_REQUEST_HEADERS].join(',');
+        const expectedVary = [ORIGIN_HEADER, AC_REQUEST_HEADERS].join(', ');
         const req = createRequestMock({
           method: HttpMethod.OPTIONS,
-          headers: {[AC_REQUEST_HEADERS]: 'Foo,Bar'},
+          headers: {[AC_REQUEST_HEADERS]: 'Foo, Bar'},
         });
         const res = createResponseMock();
         S._applyCorsHeaders(req, res, EXAMPLE_ORIGIN, true);

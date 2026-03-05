@@ -41,7 +41,7 @@
     "@e22m4u/js-service": "~0.5.1"
   },
   "peerDependencies": {
-    "@e22m4u/js-trie-router": "~0.7.3"
+    "@e22m4u/js-trie-router": "~0.7.5"
   },
   "devDependencies": {
     "@commitlint/cli": "~20.4.2",

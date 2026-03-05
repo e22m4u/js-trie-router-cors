@@ -121,7 +121,7 @@ Access-Control-Allow-Credentials: true
 ### methods
 
 Типы: `string | string[]`
-По умолчанию: `GET,HEAD,PUT,PATCH,POST,DELETE`
+По умолчанию: `GET, HEAD, PUT, PATCH, POST, DELETE`
 
 Опция задает разрешенные методы. Значение по умолчанию включает
 базовые методы протокола. Допускается передача строки или массива.

@@ -37,7 +37,7 @@ export type TrieRouterCorsOptions = {
   /**
    * Разрешенные HTTP методы.
    * 
-   * По умолчанию: `GET,HEAD,PUT,PATCH,POST,DELETE`
+   * По умолчанию: `GET, HEAD, PUT, PATCH, POST, DELETE`
    */
   methods?: string | string[];
 
@@ -46,7 +46,7 @@ export type TrieRouterCorsOptions = {
    * 
    * Если не указано, модуль использует принцип "Эхо"
    * и разрешит те заголовки, которые клиент запросит в 
-   * заголовке 'Access-Control-Request-Headers'.
+   * заголовке `Access-Control-Request-Headers`.
    */
   allowedHeaders?: string | string[];
 

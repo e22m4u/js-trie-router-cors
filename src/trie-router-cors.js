@@ -11,7 +11,8 @@ import {
 /**
  * Default cors allowed method.
  */
-export const DEFAULT_CORS_ALLOWED_METHODS = 'GET,HEAD,PUT,PATCH,POST,DELETE';
+export const DEFAULT_CORS_ALLOWED_METHODS =
+  'GET, HEAD, PUT, PATCH, POST, DELETE';
 
 /**
  * Trie router cors.
@@ -299,7 +300,7 @@ export class TrieRouterCors extends Service {
         res.setHeader(
           'Access-Control-Expose-Headers',
           Array.isArray(options.exposedHeaders)
-            ? options.exposedHeaders.join(',')
+            ? options.exposedHeaders.join(', ')
             : options.exposedHeaders,
         );
       }
@@ -311,7 +312,7 @@ export class TrieRouterCors extends Service {
       res.setHeader(
         'Access-Control-Allow-Methods',
         Array.isArray(options.methods)
-          ? options.methods.join(',')
+          ? options.methods.join(', ')
           : options.methods,
       );
     }
@@ -320,7 +321,7 @@ export class TrieRouterCors extends Service {
       res.setHeader(
         'Access-Control-Allow-Headers',
         Array.isArray(options.allowedHeaders)
-          ? options.allowedHeaders.join(',')
+          ? options.allowedHeaders.join(', ')
           : options.allowedHeaders,
       );
     } else if (req.headers['access-control-request-headers']) {
@@ -388,11 +389,15 @@ function appendVaryHeader(res, newHeader) {
     return;
   }
   const varyStr = Array.isArray(currentVary)
-    ? currentVary.join(',')
+    ? currentVary.join(', ')
     : String(currentVary);
   const regex = new RegExp(`(?:^|,)\\s*${newHeader}\\s*(?:,|$)`, 'i');
   if (regex.test(varyStr)) {
     return;
   }
-  res.setHeader('Vary', varyStr + ',' + newHeader);
+  if (Array.isArray(currentVary)) {
+    res.setHeader('Vary', [...currentVary, newHeader]);
+  } else {
+    res.setHeader('Vary', varyStr + ', ' + newHeader);
+  }
 }
