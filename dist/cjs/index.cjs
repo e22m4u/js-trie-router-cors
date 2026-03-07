@@ -42,7 +42,10 @@ var import_js_format = require("@e22m4u/js-format");
 var import_js_service = require("@e22m4u/js-service");
 var import_js_trie_router = require("@e22m4u/js-trie-router");
 var DEFAULT_CORS_ALLOWED_METHODS = "GET, HEAD, PUT, PATCH, POST, DELETE";
-var _TrieRouterCors = class _TrieRouterCors extends import_js_service.Service {
+var TrieRouterCors = class extends import_js_service.Service {
+  static {
+    __name(this, "TrieRouterCors");
+  }
   /**
    * Options.
    */
@@ -281,8 +284,6 @@ var _TrieRouterCors = class _TrieRouterCors extends import_js_service.Service {
     return true;
   }
 };
-__name(_TrieRouterCors, "TrieRouterCors");
-var TrieRouterCors = _TrieRouterCors;
 function onRequestCorsHandler(req, res, container) {
   const inst = container.getRegistered(TrieRouterCors);
   const options = inst["_options"];
