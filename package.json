@@ -38,14 +38,14 @@
   },
   "dependencies": {
     "@e22m4u/js-format": "~0.4.0",
-    "@e22m4u/js-service": "~0.5.1"
+    "@e22m4u/js-service": "~0.6.1"
   },
   "peerDependencies": {
     "@e22m4u/js-trie-router": "~0.7.5"
   },
   "devDependencies": {
-    "@commitlint/cli": "~20.4.2",
-    "@commitlint/config-conventional": "~20.4.2",
+    "@commitlint/cli": "~20.4.3",
+    "@commitlint/config-conventional": "~20.4.3",
     "@eslint/js": "~9.39.2",
     "@types/chai": "~5.2.3",
     "@types/mocha": "~10.0.10",
