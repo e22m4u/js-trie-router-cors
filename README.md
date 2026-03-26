@@ -47,6 +47,13 @@ router.useService(TrieRouterCors, {
   origin: true, // разрешить запросы с любых источников
   maxAge: 3600, // кэширование preflight запросов на один час
 });
+
+// определение маршрутов...
+//   router.defineRoute(...);
+
+// установка обработчика запросов и запуск сервера на 3000 порту
+server.on('request', (req, res) => router.handleRequest(req, res));
+server.listen(3000, 'localhost');
 ```
 
 ## Настройки
