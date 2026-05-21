@@ -358,6 +358,31 @@ describe('TrieRouterCors', function () {
       expect(S._isOriginAllowed('https://example.com')).to.be.false;
     });
 
+    it('should return true if a comma-separated string contains a matching origin', function () {
+      const S = new TrieRouterCors({origin: 'http://foo.com,http://bar.com'});
+      expect(S._isOriginAllowed('http://foo.com')).to.be.true;
+      expect(S._isOriginAllowed('http://bar.com')).to.be.true;
+    });
+
+    it('should return true if a comma-separated string with spaces contains a matching origin', function () {
+      const S = new TrieRouterCors({origin: 'http://foo.com, http://bar.com'});
+      expect(S._isOriginAllowed('http://foo.com')).to.be.true;
+      expect(S._isOriginAllowed('http://bar.com')).to.be.true;
+    });
+
+    it('should return true if a comma-separated string matches case-insensitively', function () {
+      const S = new TrieRouterCors({origin: 'http://FOO.com, http://BAR.com'});
+      expect(S._isOriginAllowed('http://foo.com')).to.be.true;
+      expect(S._isOriginAllowed('http://bar.com')).to.be.true;
+      expect(S._isOriginAllowed('HTTP://FOO.COM')).to.be.true;
+    });
+
+    it('should return false if a comma-separated string does not contain a matching origin', function () {
+      const S = new TrieRouterCors({origin: 'http://foo.com, http://bar.com'});
+      expect(S._isOriginAllowed('http://baz.com')).to.be.false;
+      expect(S._isOriginAllowed('https://foo.com')).to.be.false;
+    });
+
     it('should return true if a regular expression matches', function () {
       const S = new TrieRouterCors({origin: /\.example\.com$/});
       expect(S._isOriginAllowed('http://api.example.com')).to.be.true;

@@ -238,7 +238,8 @@ export class TrieRouterCors extends Service {
       return true;
     }
     if (typeof origin === 'string') {
-      return origin.toLowerCase() === requestOrigin.toLowerCase();
+      const allowedOrigins = origin.split(',').map(o => o.trim().toLowerCase());
+      return allowedOrigins.includes(requestOrigin.toLowerCase());
     }
     if (origin instanceof RegExp) {
       return origin.test(requestOrigin);
