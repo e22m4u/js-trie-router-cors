@@ -5,8 +5,8 @@
   "author": "Mikhail Evstropov <e22m4u@yandex.ru>",
   "license": "MIT",
   "keywords": [
+    "js-trie-router",
     "cors",
-    "trie",
     "router",
     "security"
   ],
